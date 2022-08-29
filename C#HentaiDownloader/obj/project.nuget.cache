@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "oPrOJe05dqGyHdaACpdUoHbDj6VIWA1iSruwT4DQiS8cceWjMFKOPRVmXo3fbQDejNBJcfMSNI5xmsd7wi5tpw==",
+  "success": true,
+  "projectFilePath": "/home/notfubuki/Bureau/c#/c#.csproj",
+  "expectedPackageFiles": [
+    "/home/notfubuki/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
