@@ -1,4 +1,5 @@
 # GolangHentaiDownloader
 > A Golang Hentai Downloader
-
-### go build ./main.go
+```
+go build ./main.go
+```
