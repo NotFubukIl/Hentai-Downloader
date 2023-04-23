@@ -1,0 +1,5 @@
+switch("d", "ssl")
+switch("o", "bin/")
+switch("opt", "speed")
+switch("threads", "on")
+switch("d", "release")

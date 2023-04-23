@@ -1,4 +1,5 @@
-/*/hentai
-/*/node_modules/*
-/JavascriptHentaiDownloader
-/*/bin
+hentai/
+node_modules/
+bin/
+target/
+obj/
