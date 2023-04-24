@@ -19,6 +19,16 @@
             <artifactId>json</artifactId>
             <version>20220320</version>
         </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.14.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okio</groupId>
+            <artifactId>okio</artifactId>
+            <version>1.17.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -36,7 +46,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>src.main.java.bouki.hentai.main</mainClass>
+                                    <mainClass>bouki.hentai.Hentai</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

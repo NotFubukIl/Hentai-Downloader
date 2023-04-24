@@ -1,7 +1,11 @@
 from genericpath import exists
 import requests,os,random,sys
 from concurrent.futures import ThreadPoolExecutor
-url = ["https://api.waifu.pics/many/nsfw/waifu","https://api.waifu.pics/many/nsfw/neko","https://api.waifu.pics/many/nsfw/blowjob"]
+url = [
+    "https://api.waifu.pics/many/nsfw/waifu",
+    "https://api.waifu.pics/many/nsfw/neko",
+    "https://api.waifu.pics/many/nsfw/blowjob"
+]
 if not exists("./hentai"): os.mkdir("./hentai")
 def download(url):
     filename = url.split('/')[3]

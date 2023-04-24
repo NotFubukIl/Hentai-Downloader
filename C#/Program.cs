@@ -1,41 +1,51 @@
-using System;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using System.Net;
-using System.IO;
+using Hentai;
 
+namespace Hentai;
 
-
-if (!Directory.Exists("./hentai"))
+public class Program
 {
-    Directory.CreateDirectory("./hentai");
-}
-int number;
-Console.Write("Enter The Wanted Number Of Hentai Pics: ");
-number = Convert.ToInt32(Console.ReadLine());
-for (int i = 1; i <= number; i++) {
-    Random e = new Random();
-    string[] array = { "https://nekobot.xyz/api/image?type=hentai", "https://api.waifu.pics/nsfw/waifu", "https://api.waifu.pics/nsfw/neko", "https://api.waifu.pics/nsfw/blowjob" };
-    string url = array[e.Next(0, 4)];
-    var client = new HttpClient();
-    var response = await client.GetAsync(url);
-    response.EnsureSuccessStatusCode();
-    string responseBody = await response.Content.ReadAsStringAsync();
-    dynamic cc = JObject.Parse(responseBody);
-    Console.WriteLine(cc);
-    string thisURL;
-    if (url.Contains("waifu"))
+    public static void Main()
     {
-        thisURL = cc.url;
+        if (!Directory.Exists("./hentai"))
+        {
+            Directory.CreateDirectory("./hentai");
+        }
+        string[] urls =
+        {
+            "https://nekobot.xyz/api/image?type=hentai", "https://api.waifu.pics/nsfw/waifu",
+            "https://api.waifu.pics/nsfw/neko", "https://api.waifu.pics/nsfw/blowjob"
+        };
+        string[] alternativeUrls =
+        {
+            "https://api.waifu.pics/many/nsfw/waifu",
+            "https://api.waifu.pics/many/nsfw/neko",
+            "https://api.waifu.pics/many/nsfw/blowjob"
+        };
+        Console.Write("Do you want to download the normal or alternative way (alternative is faster) (1/2): ");
+        int choice = 0;
+        while (true)
+        {
+            try
+            {
+                choice = int.Parse(Console.ReadLine() ?? throw new ArgumentException("Invalid choice"));
+                break;
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        if (choice == 0) return;
+        
+        while (true)
+        {
+            foreach (var url in choice == 1 ? urls : alternativeUrls)
+            {
+                var download = new Downloader(url);
+                if (url.Contains("many")) download.GetAlternativeHentai().GetAwaiter().GetResult();
+                else download.GetHentai().GetAwaiter().GetResult();
+            }
+        }
     }
-    else
-    {
-        thisURL = cc.message;
-    }
-    string format = thisURL.Split("/").Last();
-    var negr = new WebClient();
-    negr.DownloadFile(new Uri(thisURL), @"./hentai/" + format);
 }
-Console.WriteLine(number + " Hentai Downloaded.");
-Console.ReadLine(); 
