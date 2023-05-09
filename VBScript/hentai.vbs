@@ -1,34 +1,40 @@
-Set http = CreateObject("MSXML2.XMLHTTP")
-Set sc = CreateObject("MSScriptControl.ScriptControl")
-Set fs = CreateObject("Scripting.FileSystemObject")
+Const ForReading = 1
+Const ForWriting = 2
+Const TriStateUseDefault = -2
 
-sc.Language = "JScript"
+set FileSystemObject = CreateObject("Scripting.FileSystemObject")
 
-Dim urls
-urls = Array("https://nekobot.xyz/api/image?type=hentai", "https://api.waifu.pics/nsfw/waifu", "https://api.waifu.pics/nsfw/neko", "https://api.waifu.pics/nsfw/blowjob")
+Dim hentai
+hentai = Array("https://api.waifu.pics/nsfw/waifu", "https://api.waifu.pics/nsfw/neko", "https://api.waifu.pics/nsfw/blowjob")
 
-Function GetHentai(url)
-    
-    http.Open "GET", url, False
-    http.Send
-    res = sc.eval("(" & http.responseText & ")")
-    Dim img
-    If InStr(url, "waifu.pics") > 0 Then
-        img = res.url
-    Else
-        img = res.message
-    End If
+If Not FileSystemObject.FolderExists("hentai") Then
+    Set hentaiFolder = FileSystemObject.CreateFolder("hentai")
+End If
 
-    http.Open "GET", img, False
-    http.Send
+Set webClient = CreateObject("WinHttp.WinHttpRequest.5.1")
+i = 1
 
-    image = http.responseBody
-    filename = UBound(Split(img, "/"))
-    Set outfile = fs.CreateTextFile(".\hentai\" & filename, True)
-    outfile.Write image
-    outfile.Close()
-
+Function GetHentai()
+    For Each link In hentai
+        webClient.Open "GET", link, False
+        webClient.Send
+        url = Split(webClient.ResponseText, """url"":""")(1)
+        url = Split(url, """")(0)
+        name = Split(url, "/")(UBound(Split(url, "/")))
+        webClient.Open "GET", url, False
+        webClient.Send
+        Set stream = CreateObject("ADODB.Stream")
+        stream.Type = 1 'binary
+        stream.Open
+        stream.Write webClient.ResponseBody
+        stream.SaveToFile ".\hentai\" & name, ForWriting
+        stream.Close
+        Set stream = Nothing
+        i = i + 1
+        WScript.Echo "Downloaded " & i & " hentai"
+    Next
 End Function
 
-
-GetHentai(urls(0))
+While True
+    GetHentai
+Wend
