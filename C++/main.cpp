@@ -7,7 +7,7 @@
 
 int main() {
     std::vector<std::string> urls = {
-            "https://nekobot.xyz/api/image?type=hentai", "https://api.waifu.pics/nsfw/waifu",
+            "https://nekobot.xyz/api/image?type=downloader", "https://api.waifu.pics/nsfw/waifu",
             "https://api.waifu.pics/nsfw/neko", "https://api.waifu.pics/nsfw/blowjob"
     };
     std::vector<std::string> alturls = {
@@ -16,8 +16,8 @@ int main() {
             "https://api.waifu.pics/many/nsfw/blowjob"
     };
 
-    if (!std::filesystem::exists(".\\hentai")) {
-        auto status = std::filesystem::create_directory(".\\hentai");
+    if (!std::filesystem::exists(".\\downloader")) {
+        auto status = std::filesystem::create_directory(".\\downloader");
         if (!status) std::cerr << "failed to create directory" << std::endl;
     }
 
