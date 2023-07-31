@@ -1,0 +1,4 @@
+{:deps {org.clojure/clojure {:mvn/version "RELEASE"}
+        clj-http/clj-http {:mvn/version "RELEASE"}
+        org.clojure/data.json {:mvn/version "RELEASE"}}}
+        
