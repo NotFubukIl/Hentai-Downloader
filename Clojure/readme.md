@@ -8,7 +8,7 @@
   - [Clojure](https://clojure.org/guides/install_clojure)
   - [Java JDK (with JAVA_HOME in the env)](https://download.oracle.com/java/20/latest/jdk-20_windows-x64_bin.zip)
 <br>
-    ```bat
+    ```bash
     git clone https://github.com/NotFubukIl/Hentai-Downloader
     cd Hentai-Downloader/Clojure
     clj -A:deps
