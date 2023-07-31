@@ -9,11 +9,8 @@
   - [Java JDK (with JAVA_HOME in the env)](https://download.oracle.com/java/20/latest/jdk-20_windows-x64_bin.zip)
 <br>
     ```bash
-    git clone https://github.com/NotFubukIl/Hentai-Downloader
-    cd Hentai-Downloader/Clojure
-    clj -A:deps
-    clj main.clj
-    ```
+	mkdir -p "$(bat --config-dir)/themes"
+	```
       
   ## Fuck The Alternative.
   
